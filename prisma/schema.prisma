@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Category {
+  name       String
+  categoryId Int       @id @default(autoincrement())
+  nameSlug   String
+  cateImg    String?
+  Product    Product[]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Image {
+  id          Int      @id @default(autoincrement())
+  url         String
+  createdAt   DateTime @default(now())
+  isPublished Boolean  @default(true)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Product {
+  name        String
+  description String
+  createdAt   DateTime @default(now())
+  productId   Int      @id @default(autoincrement())
+  categoryId  Int
+  color       String
+  isPublished Boolean  @default(false)
+  size        String
+  stock       String
+  imageUrl    String
+  Category    Category @relation(fields: [categoryId], references: [categoryId])
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model User {
+  email    String @unique
+  password String
+  username String @unique
+  userId   Int    @id @default(autoincrement())
+  roles    String @default("user")
+}

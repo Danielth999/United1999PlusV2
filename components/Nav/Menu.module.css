@@ -1,0 +1,54 @@
+/* Menu.module.css */
+.menuItem {
+     position: relative;
+     width: 100%;
+   }
+   
+   .menuLink {
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     padding: 0.2rem 1.5rem;
+     width: 100%;
+     transition: all 0.3s;
+   }
+   
+   .menuBorder {
+     position: absolute;
+     bottom: 0;
+     left: 50%;
+     width: 0;
+     height: 4px;
+     background-color: #2563eb;
+     transition: all 0.3s;
+   }
+   
+   .menuItem:hover .menuBorder,
+   .active .menuBorder {
+     width: 100%;
+     left: 0;
+   }
+   
+   .active {
+     background: linear-gradient(to top, #dbeafe, #ffffff);
+   }
+   
+   .icon {
+     font-size: 36px;
+   }
+   
+   .label {
+     margin-left: 1rem;
+     font-size: 1rem;
+   }
+   
+   @media (min-width: 1024px) {
+     .menuLink {
+       flex-direction: column;
+     }
+   
+     .label {
+       margin-left: 0;
+       margin-top: 0.5rem;
+     }
+   }
