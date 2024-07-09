@@ -14,22 +14,34 @@ import Menu from "./Menu"; // นำเข้า Menu component
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const navbarVariants = {
+    hidden: { opacity: 0, y: -50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
   return (
     <>
-      <nav className="shadow-md py-4 bg-white">
+      <motion.nav 
+        className="fixed top-0 left-0 right-0 shadow-md  py-2 bg-white z-50"
+        initial="hidden"
+        animate="visible"
+        variants={navbarVariants}
+      >
         {/* container */}
         <div className="max-w-7xl mx-auto px-4">
           {/* content */}
           <div className="flex justify-between items-center">
             {/* logo */}
-            <div 
-              className="flex items-center" 
-             
+            <motion.div 
+              className="flex items-center"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
             >
               <Link href="/">
                 <Image src={Logo} height={60} width={60} alt="Logo" className='w-auto h-auto' />
               </Link>
-            </div>
+            </motion.div>
 
             {/* Hamburger Menu for small screens */}
             <div className="lg:hidden">
@@ -37,28 +49,34 @@ const Navbar = () => {
             </div>
 
             {/* search components */}
-            <div 
+            <motion.div 
               className="hidden lg:block flex-1 mx-4"
-             
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
             >
               <SearchComponent />
-            </div>
+            </motion.div>
 
             {/* contact components */}
-            <div 
+            <motion.div 
               className="hidden lg:block"
-             
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.9 }}
             >
               <Contact />
-            </div>
+            </motion.div>
 
             {/* admin login */}
-            <div 
+            <motion.div 
               className="hidden lg:block"
-            
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 1.2 }}
             >
               <Admin />
-            </div>
+            </motion.div>
           </div>
 
           {/* Responsive Menu */}
@@ -79,10 +97,10 @@ const Navbar = () => {
             )}
           </AnimatePresence>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Menu component for larger screens */}
-      <div className="hidden lg:block">
+      <div className="hidden lg:block mt-[22px]  z-40 fixed top-16 left-0 right-0 bg-white shadow-md">
         <Menu />
       </div>
     </>

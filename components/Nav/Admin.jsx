@@ -34,7 +34,7 @@ const UserProfile = () => {
           <DropdownMenuContent>
             {session.user.role === "admin" && (
               <DropdownMenuItem>
-                <Link href="/admin-dashboard/dashboard">ระบบจัดการ</Link>
+                <Link href="/admin">ระบบจัดการ</Link>
               </DropdownMenuItem>
             )}
             <DropdownMenuItem>

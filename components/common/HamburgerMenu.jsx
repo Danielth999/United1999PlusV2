@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import styles from './HamburgerMenu.module.css'; // นำเข้าไฟล์ CSS Module
+import styles from './styles/HamburgerMenu.module.css'; // นำเข้าไฟล์ CSS Module
 
 export default function HamburgerMenu({ isOpen, toggle }) {
   return (
