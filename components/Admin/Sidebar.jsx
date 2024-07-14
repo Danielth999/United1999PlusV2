@@ -1,19 +1,14 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { signOut } from 'next-auth/react';
 import { FaHome, FaUsers, FaBox, FaTag, FaSignOutAlt, FaBars } from 'react-icons/fa';
 import { HiOutlinePhotograph } from 'react-icons/hi';
 
 const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(true);
-  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const toggleSidebar = () => {
     setIsExpanded(!isExpanded);
@@ -31,7 +26,7 @@ const Sidebar = () => {
     <div className={`flex ${isExpanded ? 'w-64' : 'w-20'} bg-gray-800 text-white min-h-screen flex-col transition-width duration-300`}>
       <div className={`p-4 flex ${isExpanded ? 'justify-between' : 'justify-center'} items-center`}>
         <Link href="/" key="home-link">
-          <span className={`text-2xl font-bold ${!isExpanded && 'hidden'}`}>
+          <span className={`text-2xl font-bold ${!isExpanded ? 'hidden' : ''}`}>
             United 1999 Plus
           </span>
         </Link>
@@ -39,25 +34,23 @@ const Sidebar = () => {
           <FaBars />
         </button>
       </div>
-      {mounted && (
-        <nav className="mt-4 flex-grow">
-          {menuItems.map((item) => (
-            <Link key={item.href} href={item.href}>
-              <div className={`flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 ${pathname === item.href ? 'bg-blue-500' : ''}`}>
-                <item.icon className={`${isExpanded ? 'mr-3' : 'mx-auto'}`} />
-                {isExpanded && <span className="text-xl">{item.label}</span>}
-              </div>
-            </Link>
-          ))}
-          <div
-            className="flex items-center py-2.5 px-4 text-red-500 rounded transition duration-200 hover:bg-gray-700 cursor-pointer"
-            onClick={() => signOut({ callbackUrl: '/' })}
-          >
-            <FaSignOutAlt className={`${isExpanded ? 'mr-3' : 'mx-auto'}`} />
-            {isExpanded && <span className="text-xl">ออกจากระบบ</span>}
-          </div>
-        </nav>
-      )}
+      <nav className="mt-4 flex-grow">
+        {menuItems.map((item) => (
+          <Link key={item.href} href={item.href}>
+            <div className={`flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 ${pathname === item.href ? 'bg-blue-500' : ''}`}>
+              <item.icon className={`${isExpanded ? 'mr-3' : 'mx-auto'}`} />
+              {isExpanded && <span className="text-xl">{item.label}</span>}
+            </div>
+          </Link>
+        ))}
+        <div
+          className="flex items-center py-2.5 px-4 text-red-500 rounded transition duration-200 hover:bg-gray-700 cursor-pointer"
+          onClick={() => signOut({ callbackUrl: '/' })}
+        >
+          <FaSignOutAlt className={`${isExpanded ? 'mr-3' : 'mx-auto'}`} />
+          {isExpanded && <span className="text-xl">ออกจากระบบ</span>}
+        </div>
+      </nav>
     </div>
   );
 };

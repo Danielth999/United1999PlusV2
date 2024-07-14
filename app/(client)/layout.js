@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { Prompt } from "next/font/google";
 import "@/app/globals.css"; // นำเข้าไฟล์ CSS ที่ root
 import { Toaster } from "react-hot-toast";
 import SessionProvider from "../../components/SessionProvider";
@@ -7,7 +7,10 @@ import Footer from "@/components/Footer/Footer";
 import Loading from "@/components/common/Loading"; // ปรับเส้นทางการนำเข้า
 import { Suspense } from "react";
 
-const inter = Inter({ subsets: ["latin"] });
+const prompt = Prompt({ 
+  subsets: ["latin"],
+  weight: ["400", "600"] // เพิ่ม weight ที่ต้องการใช้
+});
 
 export const metadata = {
   title: "United 1999 Plus",
@@ -17,7 +20,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={prompt.className}>
         <SessionProvider>
           <Navbar />
           <div className="pt-32 lg:pt-52"> {/* Adjusted padding-top */}
