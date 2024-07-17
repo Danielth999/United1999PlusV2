@@ -1,6 +1,12 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 import { NextResponse } from "next/server";
+import { createClient } from '@supabase/supabase-js';
+//supabase
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
+
 export async function GET(request, { params }) {
      const { id } = params;
      try {
@@ -28,3 +34,35 @@ export async function GET(request, { params }) {
        );
      }
    }
+
+   // delete product
+   export async function DELETE(request, { params }) {
+    const { id } = params;
+    try {
+      const product = await prisma.product.delete({
+        where: { productId: parseInt(id, 10) },
+      });
+  
+      // ลบภาพจาก Supabase storage แบบ asynchronous
+      if (product.imageUrl) {
+        const fileName = new URL(product.imageUrl).pathname.split("/").pop();
+        supabase.storage
+          .from("products")
+          .remove([fileName])
+          .then(({ error }) => {
+            if (error) {
+              console.error("Error deleting image from Supabase:", error);
+            }
+          });
+      }
+  
+      return NextResponse.json(product, { status: 200 });
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      return NextResponse.json(
+        { error: "Failed to delete product" },
+        { status: 500 }
+      );
+    }
+  }
+  

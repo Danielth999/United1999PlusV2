@@ -1,5 +1,5 @@
 import ProductList from "./components/ProductList";
-import { fetchProducts, fetchCategories } from "@/utils/fetchProducts";
+import { fetchProducts, fetchCategories } from "@/utils/products/fetchProducts";
 
 export default async function AdminProductPage({ searchParams }) {
   const page = parseInt(searchParams.page, 10) || 1;
