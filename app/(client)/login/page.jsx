@@ -76,7 +76,6 @@ const LoginPage = () => {
                 </div>
                 <div>
                   <div className="mb-4 flex items-center justify-end gap-2">
-                   
                     <a
                       href="/#"
                       className="inline-block hover:underline text-sm font-medium text-blue-600 hover:text-blue-400 dark:text-blue-400 dark:hover:text-blue-300"

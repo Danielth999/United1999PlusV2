@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from 'react-hot-toast';
-
+import Link from 'next/link';
 const AddProduct = ({ categories }) => {
   const [products, setProducts] = useState([
     {
@@ -108,6 +108,20 @@ const AddProduct = ({ categories }) => {
 
   return (
     <div className="w-full max-w-4xl mx-auto p-8 bg-white rounded-lg shadow-lg mt-10">
+      <div>
+        <Link href={'/admin/products'} 
+        className='
+          bg-blue-500
+          hover:bg-blue-700
+          text-white
+          font-bold
+          py-2
+          px-4
+          rounded
+          '> 
+          กล้บ
+         </Link>
+      </div>
       <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">เพิ่มสินค้าใหม่</h1>
       <form onSubmit={handleSubmit} className="space-y-6">
         {products.map((product, index) => (

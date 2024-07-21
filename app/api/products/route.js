@@ -1,14 +1,10 @@
-import { PrismaClient } from "@prisma/client";
-import { NextResponse } from "next/server";
-import { createClient } from '@supabase/supabase-js';
+import { PrismaClient } from '@prisma/client';
+import { NextResponse } from 'next/server';
+import supabase from '@/lib/supabaseClient'; // นำเข้า supabase จาก lib/supabase.js
 import { v4 as uuidv4 } from 'uuid';
 import sharp from 'sharp';
 
 const prisma = new PrismaClient();
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 export const GET = async (req) => {
   const category = req.nextUrl.searchParams.get('category');
