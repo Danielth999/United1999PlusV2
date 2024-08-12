@@ -1,6 +1,33 @@
-
 import ProductList from '../components/ProductList';
 import Pagination from "../components/Pagination";
+
+export async function generateMetadata({ params }) {
+  const { category } = params;
+
+  return {
+    title: `สินค้าในหมวดหมู่ ${category} - United 1999 Plus`,
+    description: `สำรวจสินค้าในหมวดหมู่ ${category} จากร้าน United 1999 Plus ดูรายละเอียดและข้อมูลเกี่ยวกับสินค้าทั้งหมดได้ที่นี่`,
+    keywords: `${category}, สินค้าภายในร้าน, สินค้าจากร้าน United 1999 Plus, หมวดหมู่ ${category}`,
+    openGraph: {
+      title: `สินค้าในหมวดหมู่ ${category} - United 1999 Plus`,
+      description: `สำรวจสินค้าในหมวดหมู่ ${category} จากร้าน United 1999 Plus ดูรายละเอียดและข้อมูลเกี่ยวกับสินค้าทั้งหมดได้ที่นี่`,
+      url: `https://yourdomain.com/products/${category}`,
+      images: [
+        {
+          url: 'https://yourdomain.com/images/category-image.jpg',
+          alt: `ภาพหมวดหมู่ ${category}`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `สินค้าในหมวดหมู่ ${category} - United 1999 Plus`,
+      description: `สำรวจสินค้าในหมวดหมู่ ${category} จากร้าน United 1999 Plus ดูรายละเอียดและข้อมูลเกี่ยวกับสินค้าทั้งหมดได้ที่นี่`,
+      images: ['https://yourdomain.com/images/category-image.jpg'],
+    },
+  };
+}
+
 async function fetchProducts(category, page = 1) {
   try {
     const res = await fetch(
@@ -20,8 +47,6 @@ async function fetchProducts(category, page = 1) {
     return { products: [], totalProducts: 0, currentPage: 1, totalPages: 1 };
   }
 }
-
-
 
 export default async function CategoryPage({ params, searchParams }) {
   const { category } = params;

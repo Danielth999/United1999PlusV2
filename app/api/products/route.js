@@ -28,7 +28,7 @@ export const GET = async (req) => {
 
     if (category) {
       queryConditions.AND.push({
-        categoryId: parseInt(category, 10),
+        categoryId: parseInt(category, 10), // แปลง category จาก String เป็น Number
       });
     }
 

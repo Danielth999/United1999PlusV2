@@ -1,4 +1,5 @@
 'use client';
+import { useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import useSWR from 'swr';
 import Loading from '@/components/common/Loading';
@@ -19,6 +20,19 @@ export default function ProductDetail() {
       revalidateOnFocus: false, // ไม่ revalidate เมื่อ focus
     }
   );
+
+  // ใช้ useEffect เพื่ออัพเดต title ของหน้า
+  useEffect(() => {
+    if (product) {
+      document.title = `${product.name} - รายละเอียดสินค้า`;
+    } else if (isLoading) {
+      document.title = 'กำลังโหลด...';
+    } else if (error) {
+      document.title = 'ข้อผิดพลาด - ไม่สามารถดึงข้อมูลสินค้าได้';
+    } else if (!productId) {
+      document.title = 'ข้อผิดพลาด - รหัสสินค้าหายไปจาก URL';
+    }
+  }, [product, isLoading, error, productId]);
 
   // ตรวจสอบว่า productId ถูกกำหนดหรือไม่
   if (!productId) {
