@@ -6,7 +6,7 @@ import Navbar from "@/components/Nav/Navbar";
 import Footer from "@/components/Footer/Footer";
 import Loading from "@/components/common/Loading"; // ปรับเส้นทางการนำเข้า
 import { Suspense } from "react";
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 const prompt = Prompt({ 
   subsets: ["latin"],
   weight: ["400", "600"] // เพิ่ม weight ที่ต้องการใช้
@@ -30,6 +30,7 @@ export default function RootLayout({ children }) {
               </div>
             }>
               {children}
+              <SpeedInsights/>
             </Suspense>
           </div>
           <Footer />
